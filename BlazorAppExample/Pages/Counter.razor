@@ -1,0 +1,24 @@
+﻿@page "/counter"
+
+<PageTitle>Persistent Counter</PageTitle>
+
+
+<h1><p role="status">Current count: @State.ClickCount</p></h1>
+<p>The count will stay here even if focus is lost from this page.</p>
+<button class="btn btn-primary" @onclick="IncrementCount">Add</button>
+<button class="btn btn-primary" @onclick="DecrementCount">Remove</button>
+
+@code {
+
+    [CascadingParameter] UserStateMemory State {get; set;}
+
+    private void IncrementCount()
+    {
+        State.ClickCount++;
+    }
+
+    private void DecrementCount()
+    {
+        State.ClickCount--;
+    }
+}

@@ -1,0 +1,27 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager UriHelper
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 auth">
+            <LoginDisplay />
+            <button class="btn btn-primary" @onclick=@Navigate >More on ASP.NET</button>
+        </div>
+        <UserStateMemory>
+        <article class="content px-4">
+            @Body
+        </article>
+        </UserStateMemory>
+    </main>
+</div>
+
+@code {
+    void Navigate()
+    {
+        UriHelper.NavigateTo("https://docs.microsoft.com/aspnet/");
+    }
+}

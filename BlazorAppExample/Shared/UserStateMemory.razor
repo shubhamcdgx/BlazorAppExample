@@ -1,0 +1,19 @@
+﻿<CascadingValue Value="this">
+	@ChildContent
+</CascadingValue>
+
+@code {
+	[Parameter] public RenderFragment ChildContent {get; set; }
+
+	public int ClickCount {get; set; }
+
+	public double CalculatorScreen { get; set; }
+	public string CalculatorScreenMini { get; set; }
+	public double CalculatorIntermediateVar { get; set; }
+	public char CalculatorFxVar { get; set; }
+
+	public int ShapeConfiguration { get; set; }
+
+	public int ShapeRoundness { get; set; }
+}
+ 

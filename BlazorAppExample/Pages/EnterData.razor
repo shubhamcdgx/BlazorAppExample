@@ -1,0 +1,28 @@
+﻿@page "/enterdata"
+
+<h3>EnterData</h3>
+
+
+<h3>Create a file:</h3>
+<button class="btn btn-primary" @onclick="CreateFile">Add</button>
+
+<h2>Displaying Items</h2>
+
+<h2>Under maintenance!!</h2>
+
+@code {
+
+
+    private void CreateFile()
+    {
+
+        SmartPhone NewObj = new SmartPhone();
+       
+
+    }
+
+    private void GetFileList()
+    {
+        string[] fileArray = Directory.GetFiles(@"D:\Media\");
+    }
+}

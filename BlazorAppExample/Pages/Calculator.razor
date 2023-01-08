@@ -1,0 +1,151 @@
+﻿@using System.Data
+@page "/calculator"
+@using BlazorAppExample.Shared
+
+
+<h1>Calculator</h1>
+
+<style>
+	.display {
+		border: 1px solid gray;
+		padding: 3px;
+	}
+
+	.display-numeric
+	{
+		text-align: right;
+		font-size: 42px;
+		padding: 3px;
+		text-transform: uppercase;
+		color: #4CAF50;
+	}
+
+	.display-numeric-mini {
+		text-align: right;
+		font-size: 28px;
+		padding: 1px;
+		text-transform: uppercase;
+		color: #4CAF50;
+	}
+
+	.grid-container {
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+		gap: 1px 1px;
+	}
+
+	#grid-item-char {
+		background-color: #545d8e; /* Blue */
+		border: none;
+		color: white;
+		padding: 20px 40px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 26px;
+	}
+
+	#grid-item-fnx {
+		background-color: #545d8e; /* Blue */
+		border: none;
+		color: white;
+		padding: 20px 40px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 26px;
+	}
+</style>
+
+<p role="status">Current count from Counter: @State.ClickCount</p>
+
+
+<div class="display">
+	<p class="display-numeric-mini" id="output">@State.CalculatorScreenMini</p>
+	<p class="display-numeric" id="output">@State.CalculatorScreen</p>
+</div>
+
+
+<div class="grid-container">
+	<button @onclick="() => ConsolidateDisplay(0)" id="grid-item-fnx">C</button>
+	<button @onclick="() => ConsolidateDisplay(10)" id="grid-item-fnx">CE</button>
+	<button id="grid-item-fnx">%</button>
+	<button id="grid-item-fnx">/</button>
+
+	<button @onclick="() => ConsolidateDisplay('7')" id="grid-item-char">7</button>
+	<button @onclick="() => ConsolidateDisplay('8')" id="grid-item-char">8</button>
+	<button @onclick="() => ConsolidateDisplay('9')" id="grid-item-char">9</button>
+	<button id="grid-item-fnx">x</button>
+
+	<button @onclick="() => ConsolidateDisplay('4')" id="grid-item-char">4</button>
+	<button @onclick="() => ConsolidateDisplay('5')" id="grid-item-char">5</button>
+	<button @onclick="() => ConsolidateDisplay('6')" id="grid-item-char">6</button>
+	<button id="grid-item-fnx">-</button>
+
+	<button @onclick="() => ConsolidateDisplay('1')" id="grid-item-char">1</button>
+	<button @onclick="() => ConsolidateDisplay('2')" id="grid-item-char">2</button>
+	<button @onclick="() => ConsolidateDisplay('3')" id="grid-item-char">3</button>
+	<button @onclick="() => ConsolidateDisplay(1)" id="grid-item-fnx">+</button>
+	<button id="grid-item-fnx">+/-</button>
+	<button @onclick="() => ConsolidateDisplay('0')" id="grid-item-char">0</button>
+	<button id="grid-item-fnx">.</button>
+	<button @onclick="() => ConsolidateDisplay(9)" id="grid-item-fnx">=</button>
+
+ </div>
+
+@code {
+	[CascadingParameter] UserStateMemory State { get; set; }
+
+	string zero = "0";
+	bool newline = true;
+
+	public void ConsolidateDisplay(char btnpress)
+	{	
+		if (newline == false)
+		{
+			State.CalculatorScreen = 0;
+			newline = true;
+			zero = "0";
+
+		}
+		string UpdatedContents = string.Concat(State.CalculatorScreen.ToString(), btnpress); ;
+		State.CalculatorScreen = double.Parse(UpdatedContents);
+		
+		
+	}
+	public void ConsolidateDisplay(int x)
+	{
+		switch(x)
+		{
+			case 0: //Clear
+				State.CalculatorScreen = 0D;
+				break;
+			case 1: //Add
+				newline = false;
+				if (State.CalculatorScreen != 0) 
+				State.CalculatorIntermediateVar = State.CalculatorScreen;
+				State.CalculatorScreenMini = State.CalculatorScreenMini + State.CalculatorScreen.ToString() + " + ";
+				break;
+			case 2: //Sub
+				State.CalculatorIntermediateVar = State.CalculatorScreen;
+				State.CalculatorScreenMini = State.CalculatorScreenMini + State.CalculatorScreen.ToString() + " - ";
+				break;
+			case 9: //Equals
+				State.CalculatorScreen = Convert.ToDouble(new DataTable().Compute(State.CalculatorScreenMini, null));
+				break;
+			case 10://Clear
+				State.CalculatorScreen = 0D;
+				State.CalculatorScreenMini = (0D).ToString();
+				break;
+
+		}
+		
+	}
+
+	public void TypeWriter(int inputChar)
+	{
+
+	}
+
+
+}
