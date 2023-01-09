@@ -830,3 +830,4 @@ C:\Users\shubhamc\source\repos\BlazorAppExample\BlazorAppExample\obj\Debug\net6.
 C:\Users\shubhamc\source\repos\BlazorAppExample\BlazorAppExample\obj\Debug\net6.0\refint\BlazorAppExample.dll
 C:\Users\shubhamc\source\repos\BlazorAppExample\BlazorAppExample\obj\Debug\net6.0\BlazorAppExample.pdb
 C:\Users\shubhamc\source\repos\BlazorAppExample\BlazorAppExample\obj\Debug\net6.0\ref\BlazorAppExample.dll
+C:\Users\shubhamc\source\repos\BlazorAppExample\BlazorAppExample\obj\Debug\net6.0\scopedcss\Pages\Index.razor.rz.scp.css

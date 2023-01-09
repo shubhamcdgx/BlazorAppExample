@@ -40,10 +40,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shubhamc/source/repos/BlazorAppExample/BlazorAppExample/Pages/Index.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/shubhamc/source/repos/BlazorAppExample/BlazorAppExample/Shared/LoginDisplay.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luRGlzcGxheS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -63,6 +59,10 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/shubhamc/source/repos/BlazorAppExample/BlazorAppExample/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/shubhamc/source/repos/BlazorAppExample/BlazorAppExample/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-vperhov7rj
 
 [C:/Users/shubhamc/source/repos/BlazorAppExample/BlazorAppExample/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=

@@ -2,6 +2,8 @@
 @using System.Data;
 @using BlazorAppExample.Shared;
 @using System.Timers;
+@using System.Threading.Tasks;
+
 
 
 <style>
@@ -68,8 +70,8 @@
 
         #wrapper[data-configuration="1"] > .shape:nth-child(1) {
             left: 0%;
-            top: 0%;5
-            height: 50%;
+            top: 0%;
+            5 height: 50%;
             width: 20%;
         }
 
@@ -310,20 +312,27 @@
 
 </style>
 
-
-<div id="wrapper" data-configuration="@State.ShapeConfiguration" data-roundness="@State.ShapeRoundness">
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
-    <div class="shape"></div>
+<div id="wrapper" @onclick="AutoChangeShape" data-configuration="@State.ShapeConfiguration" data-roundness="@State.ShapeRoundness">
+    <div class="shape" @onclick="AutoChangeShape"></div>
+    <div class="shape" @onclick="AutoChangeShape"></div>
+    <div class="shape" @onclick="AutoChangeShape"></div>
+    <div class="shape" @onclick="AutoChangeShape"></div>
+    <div class="shape" @onclick="AutoChangeShape"></div>
+    <div class="shape" @onclick="AutoChangeShape"></div>
+    <div class="shape" @onclick="AutoChangeShape"></div>
 </div>
 
 <br>
 <br>
-<button style="align:center;" class="btn btn-primary" @onclick="AutoChangeShape">Change Shapes</button>
+
+   <div style="color:grey;">
+
+        
+        <p>Click on shapes to morph </p>
+
+        
+    </div>
+
 
 
 <!--<SurveyPrompt Title="How is Blazor working for you?" />-->
@@ -335,39 +344,59 @@
     [CascadingParameter] UserStateMemory State { get; set; }
 
     int[,] StateArray = { 
-        { 1, 1, 1, 2, 2, 3, 3 }, 
-        { 1, 2, 4, 2, 3, 3, 4 } 
+        { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 }, 
+        { 1, 2, 3, 4, 2, 3, 4, 3, 4, 4 } 
     };
     int Shapeloop = 0;
+    private Timer aTimer = default!;
 
     public async void ChangeShape()
     {
         for (int i = 0; i < StateArray.Length; i++)
         {
             State.ShapeConfiguration = StateArray[0,i];
-            State.ShapeRoundness = StateArray[i,0];
+            State.ShapeRoundness = StateArray[1,i];
             await Task.Delay(2000);
         }
     }
 
-    public void AutoChangeShape()
+    public async void AutoChangeShape()
     {
-            Console.WriteLine("Before - Config: ", State.ShapeConfiguration.ToString(), " + ", "Round: ", State.ShapeRoundness.ToString());
-
-            State.ShapeConfiguration = StateArray[0, Shapeloop];
-            State.ShapeRoundness = StateArray[1, Shapeloop];
-            Shapeloop++;
-
-            Console.WriteLine("After - Config: ", State.ShapeConfiguration.ToString(), " + ", "Round: ", State.ShapeRoundness.ToString());
-
-            if (Shapeloop == 6)
-                Shapeloop = 0;
+        State.ShapeConfiguration = StateArray[0, Shapeloop];
+        State.ShapeRoundness = StateArray[1, Shapeloop];
+        Shapeloop++;
+        if (Shapeloop == 9) Shapeloop = 0;
     }
 
+    async Task Repeat()
+    {
+        await Task.Delay(2000).ContinueWith(_ => { AutoChangeShape();});
+    } 
     protected override async Task OnInitializedAsync()
     {
         AutoChangeShape();
+       
+       Task.Factory.StartNew(() =>
+        {
+            System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+              System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+              System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+              System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+              System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+              System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+            System.Threading.Thread.Sleep(2000);
+            AutoChangeShape();
+        });
+        
     }
-  
+
+   
+ 
 
 }
